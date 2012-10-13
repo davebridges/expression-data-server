@@ -1,0 +1,4 @@
+This folder contains the raw data, which is then parsed to populate the gene tables.
+
+The gene names table is generated from ENSEMBL Mus musculus build NCBIM37 and was downloaded from biomart.
+The bookmark for this table is http://central.biomart.org/martanalysis/#!/Gene retrieval/Ensembl?ds=mmusculus_gene_ensembl&preview=true as results.txt then renamed as gene_names.txt
