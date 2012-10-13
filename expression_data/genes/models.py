@@ -24,8 +24,8 @@ class Gene(models.Model):
     type = models.CharField(max_length=20, help_text="Gene Type")
     status = models.CharField(max_length=15, help_text="Current Gene Status")
 
-    created = models.DateTimeField(auto_now_add = True, help_text="Created in our database")
-    updated = models.DateTimeField(auto_now = True, help_text="Last Updated in our database")
+    #created = models.DateTimeField(auto_now_add = True, help_text="Created in our database")
+    #updated = models.DateTimeField(auto_now = True, help_text="Last Updated in our database")
     
     def __unicode__(self):
         '''The unicode representation of a gene is its name'''
@@ -34,4 +34,27 @@ class Gene(models.Model):
     @models.permalink
     def get_absolute_url(self):
         '''the permalink for a gene detail page is /gene/<name>'''
-        return ('gene-details', [str(self.name)])    
+        return ('gene-details', [str(self.name)]) 
+        
+def gene_update():
+    '''This function updates all gene objects from a file'''
+    import csv
+    filename = "/Users/davebrid/Documents/SRC/expression-data-server/expression_data/genes/datasets/gene_names.txt"
+    print "Updating from file %s" % filename
+    with open(filename, 'r') as inputfile:
+        for row in csv.DictReader(inputfile, delimiter='\t'):
+            try:
+                gene = Gene(name = row['Associated Gene Name'],
+                ensemblID = row['Ensembl Gene ID'],
+                chromosome = row['Chromosome Name'],
+                start = row['Gene Start (bp)'],
+                end = row['Gene End (bp)'],
+                strand = row['Strand'],
+                band = row['Band'],
+                transcript_count = row['Transcript count'],
+                type = row['Gene Biotype'],
+                status = row['Status (gene)'])
+                gene.save()
+                print "Updated %s" % row['Associated Gene Name']
+            except IndexError:
+                print "Skipped %s" % row['Associated Gene Name']                                     
