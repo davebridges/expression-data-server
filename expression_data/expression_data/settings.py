@@ -1,7 +1,7 @@
 # Django settings for expression_data project.
 
 try:
-    from local_settings import *
+    from localsettings import *
 except ImportError:
     pass
 
