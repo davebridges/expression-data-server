@@ -1,0 +1,19 @@
+[
+    {
+        "pk": "Pikfyve", 
+        "model": "genes.gene", 
+        "fields": {
+            "status": "KNOWN", 
+            "updated": "2012-10-13T17:38:58.268Z", 
+            "end": 65274012, 
+            "ensemblID": "ENSMUSG00000025949", 
+            "band": "C2", 
+            "created": "2012-10-13T17:38:58.268Z", 
+            "start": 65186750, 
+            "strand": 1, 
+            "transcript_count": 1, 
+            "type": "protein_coding", 
+            "chromosome": "1"
+        }
+    }
+]
