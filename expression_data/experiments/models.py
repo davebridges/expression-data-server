@@ -86,8 +86,9 @@ class Software(models.Model):
         return "%s (%s)" % (self.name, self.version)
        
     class Meta:
-        '''This is an abstract model.'''
+        '''This is an abstract model, and the name/version combinations must be unique'''
         abstract = True
+        unique_together = ("name", "version")
        
 class SequenceAlignmentSoftware(Software):
     '''This model contains the data for the software used in aligning sequencing reads.
