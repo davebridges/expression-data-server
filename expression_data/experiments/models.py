@@ -9,7 +9,7 @@ This package contains the main :class:`~experiments.models.Experiment` objects a
 
 * The description of the sample as :class:`~experiments.models.Sample`
 * The manipulation of the samples as :class:`~experiments.models.Manipulation`
-* The alignment program as :class:`~experiments.models.SequenceAlignmentProgram` for :class:`~experiments.models.mRNASeqExperiment` objects
+* The alignment program as :class:`~experiments.models.SequenceAlignmentSoftware` for :class:`~experiments.models.mRNASeqExperiment` objects
 * The differential expression program as :class:`~experiments.models.DifferentialExpressionSoftware` for :class:`~experiments.models.mRNASeqExperiment` objects
 * The reference genome as :class:`~experiments.models.ReferenceGenomeAssembly` for :class:`~experiments.models.mRNASeqExperiment` objects
 * The :class:`~researchers.models.Researcher` objects are defined in the :mod:`researchers` app.
