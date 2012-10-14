@@ -66,6 +66,10 @@ class mRNASeqExperiment(Experiment):
         help_text="What genome assembly were sequences aligned to")
     differential_expression_software = models.ForeignKey('DifferentialExpressionSoftware', blank=True, null=True,
         help_text = "How was differential expression quantified?")
+        
+    class Meta:
+        '''Updated the verbose name of the experiments.'''
+        verbose_name_plural = 'mRNA-Seq Experiments'          
     
 class Software(models.Model):
     '''This model is the base class for software.
@@ -91,7 +95,10 @@ class SequenceAlignmentSoftware(Software):
     This extends the base class :class:`~experiments.models.Software`
     The name and version are required fields.
     '''       
-    pass
+
+    class Meta:
+        '''Updated the verbose name of the software.'''
+        verbose_name_plural = 'Sequence Alignment Software'  
     
 class DifferentialExpressionSoftware(Software):
     '''This model contains the data for the differential analysis software.
@@ -99,7 +106,10 @@ class DifferentialExpressionSoftware(Software):
     This extends the base class :class:`~experiments.models.Software`
     The name and version are required fields.
     '''
-    pass    
+    
+    class Meta:
+        '''Updated the verbose name of the software.'''
+        verbose_name_plural = 'Differential Expression Software'   
        
 class ReferenceGenomeAssembly(models.Model):
     '''This object contains details about which reference genome was used.
@@ -111,6 +121,10 @@ class ReferenceGenomeAssembly(models.Model):
     release_date = models.DateField(blank=True, null=True, help_text = "Release date of this version.")
     url = models.URLField(blank=True, null=True, help_text="Link to the genome assembly.")
     species = models.CharField(choices = SPECIES, max_length=20, help_text="Which species?")
+
+    class Meta:
+        '''Updated the verbose name of the assembly.'''
+        verbose_name_plural = 'Reference Genome Assemblies'  
     
     def __unicode__(self):
         '''The unicode representation is the source and the version.'''
