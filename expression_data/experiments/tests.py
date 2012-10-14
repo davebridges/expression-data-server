@@ -129,4 +129,21 @@ class DifferentialExpressionSoftwareModelTests(GeneralTestCase):
         
         test_software = DifferentialExpressionSoftware(name = "Test Software", version="1.0.1")
         test_software.save()
-        self.assertEqual(test_software.__unicode__(), "Test Software (1.0.1)")         
+        self.assertEqual(test_software.__unicode__(), "Test Software (1.0.1)")   
+              
+class ReferenceGenomeAssemblyModelTests(GeneralTestCase):
+    '''This class tests various aspects of the :class:`~experiments.models.ReferenceGenomeAssembly` model.'''
+                
+    def test_assembly_minimal(self):
+        '''This test that a :class:`~experiments.models.ReferenceGenomeAssembly` can be created.'''
+         
+        test_assembly = ReferenceGenomeAssembly(source = "Ensembl", version="37.1", species="mouse")
+        test_assembly.save()
+        self.assertEqual(test_assembly.pk, 1) #presumes no genes loaded in fixture data
+        
+    def test_assembly_unicode(self):
+        '''This tests that the unicode representation of an :class:`~experiments.models.ReferenceGenomeAssembly` is set as its description.'''               
+        
+        test_assembly = ReferenceGenomeAssembly(source = "Ensembl", version="37.1", species="mouse")
+        test_assembly.save()
+        self.assertEqual(test_assembly.__unicode__(), "Ensembl (37.1)")               

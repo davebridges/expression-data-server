@@ -19,6 +19,11 @@ from django.db import models
 
 from researchers.models import Researcher
 
+SPECIES = (
+    	('mouse', 'Mus Musculus'),
+    	('human', 'Homo Sapiens'),
+    	('other', 'Other'),)
+
 class Experiment(models.Model):
     '''
     This base class contains the generic experimental details.
@@ -99,12 +104,13 @@ class DifferentialExpressionSoftware(Software):
 class ReferenceGenomeAssembly(models.Model):
     '''This object contains details about which reference genome was used.
     
-    Both the source and the version are required fields.'''
+    The source, version and species are required fields.'''
     
     source = models.CharField(max_length=25, help_text="Such as Ensembl, UCSC or NCBI")    
     version = models.CharField(max_length=10, help_text="Which version of the assembly")   
     release_date = models.DateField(blank=True, null=True, help_text = "Release date of this version.")
     url = models.URLField(blank=True, null=True, help_text="Link to the genome assembly.")
+    species = models.CharField(choices = SPECIES, max_length=20, help_text="Which species?")
     
     def __unicode__(self):
         '''The unicode representation is the source and the version.'''
@@ -120,11 +126,6 @@ class Sample(models.Model):
     	('cells', 'Cells'),
     	('organism', 'Whole Organism'),
     	('in vitro', 'In Vitro'),)
-    	
-    SPECIES = (
-    	('mouse', 'Mus Musculus'),
-    	('human', 'Homo Sapiens'),
-    	('other', 'Other'),)
     
     description = models.CharField(max_length=50, help_text="Name for the sample")
     type = models.CharField(choices=SAMPLE_TYPES, max_length=10, help_text="What type are these samples.")
