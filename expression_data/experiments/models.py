@@ -134,8 +134,7 @@ class Sample(models.Model):
     def __unicode__(self):
         '''The unicode representation is the description.'''
         return "%s" % self.description
-        
-    
+            
 class Manipulation(models.Model):
     '''This describes how the samples were differentially manipulated.
     
