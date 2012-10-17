@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+Gene Search
+{% endblock %}
+
+{% block content %}
+<h1>Search for a Gene</h2>
+<form action="/search/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+<h3>What is my gene name?</h3>
+<p>If you are unsure as to your official gene name search <a href="http://www.ncbi.nlm.nih.gov/gene">NCBI</a>.</p>
+
+{% endblock %}
