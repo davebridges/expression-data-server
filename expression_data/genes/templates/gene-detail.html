@@ -4,6 +4,37 @@
 {{ gene }}
 {% endblock %}
 
+{% block scripts %}
+{% endblock %}
+
 {% block content %}
 <h1>{{ gene }}</h1>
+
+<section id="gene details">
+
+<table border="1">
+<tr>
+	<th>ENSEMBL ID</th>
+	<th>Chromosome</th>
+	<th>Region</th>
+	<th>Band</th>
+	<th>Transcript Count</th>
+	<th>Type</th>
+	<th>Status</th>				
+</tr>
+<tr>
+	<td>{{ gene.ensemblID }}</td>
+    <td>{{ gene.chromosome }}</td>
+    <td>{{ gene.start }} - {{ gene.end }} ({{ gene.strand }})</td>
+    <td>{{ gene.band }}</td>
+    <td>{{ gene.transcript_count }}</td>
+    <td>{{ gene.type }}</td>
+    <td>{{ gene.status }}</td>
+</tr>
+</table>
+
+<script>
+
+</section>
+
 {% endblock %}
