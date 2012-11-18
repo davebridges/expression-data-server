@@ -69,7 +69,8 @@ class mRNASeqExperiment(Experiment):
         
     class Meta:
         '''Updated the verbose name of the experiments.'''
-        verbose_name_plural = 'mRNA-Seq Experiments'          
+        verbose_name_plural = 'mRNA-Seq Experiments' 
+        verbose_name = 'mRNA-Seq Experiment'         
     
 class MicroArrayExperiment(Experiment):
     '''These objects are for microarray experiments.
@@ -81,6 +82,11 @@ class MicroArrayExperiment(Experiment):
     platform = models.CharField(max_length=15, help_text = 'Which chip was used for this microarray, for example GPLxxx')
     differential_expression_software = models.ForeignKey('DifferentialExpressionSoftware', blank=True, null=True,
         help_text = "How was differential expression quantified?")
+        
+    class Meta:
+        '''Updated the verbose name of the experiments.'''
+        verbose_name_plural = 'Microarray Experiments' 
+        verbose_name = 'Microarray Experiment'         
         
 class Software(models.Model):
     '''This model is the base class for software.
