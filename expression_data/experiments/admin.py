@@ -5,12 +5,17 @@ All objects have a generic Admin interface.
 '''
 
 from django.contrib import admin
-from experiments.models import mRNASeqExperiment, SequenceAlignmentSoftware, DifferentialExpressionSoftware, ReferenceGenomeAssembly, Sample, Manipulation
+from experiments.models import mRNASeqExperiment, SequenceAlignmentSoftware, DifferentialExpressionSoftware, ReferenceGenomeAssembly, Sample, Manipulation, MicroArrayExperiment
 
 class mRNASeqExperimentAdmin(admin.ModelAdmin):
     '''Generic admin interface for :class:`~experiments.models.mRNASeqExperiment' objects.'''
     pass
 admin.site.register(mRNASeqExperiment, mRNASeqExperimentAdmin)
+
+class MicroArrayExperimentAdmin(admin.ModelAdmin):
+    '''Generic admin interface for :class:`~experiments.models.MicroArrayExperiment' objects.'''
+    pass
+admin.site.register(MicroArrayExperiment, MicroArrayExperimentAdmin)
 
 class SequenceAlignmentSoftwareAdmin(admin.ModelAdmin):
     '''Generic admin interface for :class:`~experiments.models.SequenceAlignmentSoftware' objects.'''
