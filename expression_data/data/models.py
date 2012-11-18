@@ -33,7 +33,7 @@ class BaseData(models.Model):
         '''This is an abstract model.'''
         abstract = True
         
-class GeneExperimentData(BaseData)                
+class GeneExperimentData(BaseData):                
     '''These data are for gene-level data, aggregated per experiment.
     
     These data can be used with :class:`~experiments.models.mRNASeqExperiment` or :class:`~experiments.models.MicroArrayExperiment` experiments.
@@ -51,7 +51,12 @@ class GeneExperimentData(BaseData)
     status = models.CharField(max_length=20, blank=True, null=True, help_text="The status code of the test.")
     fold_change = models.DecimalField(max_digits=6, decimal_places=4, help_text="The log(2) fold change.")
     test_statistic = models.DecimalField(max_digits=6, decimal_places=5, help_text="The value of the test statistic used to compute significance.")
-    p_value = models.DecimalField(max_digits=6, decimal_places=5, help_text="Unadjusted p-value.")
-    q_value = models.DecimalField(max_digits=6, decimal_places=5, help_text="Multiple Comparason Adjusted p-value (Typically FDR)")
-    significant = models.CharField(max_length=3, blank=True, null=True, help_text="Is the q-value < 0.05?".)
+    p_value = models.DecimalField(max_digits=9, decimal_places=8, help_text="Unadjusted p-value.")
+    q_value = models.DecimalField(max_digits=9, decimal_places=8, help_text="Multiple Comparason Adjusted p-value (Typically FDR)")
+    significant = models.CharField(max_length=3, blank=True, null=True, help_text="Is the q-value < 0.05?")
+    
+    class Meta:
+        '''Updated the verbose name of the datum.'''
+        verbose_name_plural = 'Experiment Level Data for a Gene' 
+        verbose_name = 'Experiment Level Datum for a Gene' 
     
