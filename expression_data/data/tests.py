@@ -54,7 +54,16 @@ class GeneExperimentDataTests(TestCase):
         	gene=Gene.objects.get(pk='Pikfyve'),
         	fold_change = 0.419048218,
         	p_value = 0.110512214,
-        	q_value = 0.995959851) 
+        	q_value = 0.995959851,
+        	locus = '1:3054232-3054733',
+        	internal_id = 'XLOC_000001',
+        	sample_1 = 'Control',
+        	sample_2 = 'Treated',
+        	amount_1 = 0.0778978,
+        	amount_2 = 0.0881688,
+        	status = 'OK',
+        	test_statistic = -0.0754818,
+        	significant = 'no') 
         test_datum.save()
         self.assertEqual(test_datum.pk, 1) #presumes one model loaded in fixture data       
         
