@@ -71,6 +71,17 @@ class mRNASeqExperiment(Experiment):
         '''Updated the verbose name of the experiments.'''
         verbose_name_plural = 'mRNA-Seq Experiments'          
     
+class MicroArrayExperiment(Experiment)
+    '''These objects are for microarray experiments.
+    
+    This is a subclass of :class:`experiments.models.Experiment` and uses many of those properties.
+    From the base class, name is a required field.
+    '''
+    
+    platform = models.CharField(help_text = 'Which chip was used for this microarray, for example GPLxxx')
+    differential_expression_software = models.ForeignKey('DifferentialExpressionSoftware', blank=True, null=True,
+        help_text = "How was differential expression quantified?")
+        
 class Software(models.Model):
     '''This model is the base class for software.
    
