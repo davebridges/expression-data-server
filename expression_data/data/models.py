@@ -9,7 +9,7 @@ from django.contrib.contenttypes import generic
 
 from genes.models import Gene
 
-class Data(models.Model):
+class BaseData(models.Model):
     '''This is the abstract base class for all data objects.
     
     This model contains data for a given :class:`~experiments.models.mRNASeqExperiment` or :class:`~experiments.models.MicroArrayExperiment`.
@@ -31,4 +31,27 @@ class Data(models.Model):
     
     class Meta:
         '''This is an abstract model.'''
-        abstract = True        
+        abstract = True
+        
+class GeneExperimentData(BaseData)                
+    '''These data are for gene-level data, aggregated per experiment.
+    
+    These data can be used with :class:`~experiments.models.mRNASeqExperiment` or :class:`~experiments.models.MicroArrayExperiment` experiments.
+    This is an extension of the abstract base model :class:`data.models.BaseData`.
+    The fields in this model are based on the columns in the gene_exp.diff from cufflinks.  See http://cufflinks.cbcb.umd.edu/manual.html#cuffdiff_output for more details.
+    The required fields are **gene**, **experiment**, **fold_change**, **p_value** and **q_value**.
+    '''
+    
+    locus = models.CharField(max_length=20, blank=True, null=True, help_text="Chromosomal location of this gene.")
+    internal_id = models.CharField(max_length=20, blank=True, null=True, help_text="The probe id, or internal identification code for this gene.")
+    sample_1 = models.CharField(max_length=20, blank=True, null=True, help_text="The name of the first group in the comparason.")
+    sample_2 = models.CharField(max_length=20, blank=True, null=True, help_text="The name of the second group in the comparason.")
+    amount_1 = models.DecimalField(max_digits=10, decimal_places=6, help_text="The amount in the first group.")
+    amount_2 = models.DecimalField(max_digits=10, decimal_places=6, help_text="The amount in the second group.")
+    status = models.CharField(max_length=20, blank=True, null=True, help_text="The status code of the test.")
+    fold_change = models.DecimalField(max_digits=6, decimal_places=4, help_text="The log(2) fold change.")
+    test_statistic = models.DecimalField(max_digits=6, decimal_places=5, help_text="The value of the test statistic used to compute significance.")
+    p_value = models.DecimalField(max_digits=6, decimal_places=5, help_text="Unadjusted p-value.")
+    q_value = models.DecimalField(max_digits=6, decimal_places=5, help_text="Multiple Comparason Adjusted p-value (Typically FDR)")
+    significant = models.CharField(max_length=3, blank=True, null=True, help_text="Is the q-value < 0.05?".)
+    
