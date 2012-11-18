@@ -1,0 +1,81 @@
+[
+    {
+        "pk": 1, 
+        "model": "experiments.mrnaseqexperiment", 
+        "fields": {
+            "differential_expression_software": 1, 
+            "name": "test experiment", 
+            "created": "2012-11-18T17:09:20.057Z", 
+            "notes": "we did some stuff, measured some stuff", 
+            "manipulation": [
+                1
+            ], 
+            "modified": "2012-11-18T17:09:20.057Z", 
+            "reference_genome": 1, 
+            "date_performed": "2012-11-18", 
+            "samples": [
+                1, 
+                2
+            ], 
+            "alignment_software": 1, 
+            "researchers": []
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "experiments.sequencealignmentsoftware", 
+        "fields": {
+            "url": "http://tophat.cbcb.umd.edu/", 
+            "version": "2.0.2/2.06", 
+            "name": "Bowtie/Tophat"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "experiments.differentialexpressionsoftware", 
+        "fields": {
+            "url": "http://cufflinks.cbcb.umd.edu/", 
+            "version": "2.0.2", 
+            "name": "Cufflinks"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "experiments.referencegenomeassembly", 
+        "fields": {
+            "url": "ftp://ftp.ensembl.org/pub/release-69/fasta/mus_musculus", 
+            "source": "Ensembl", 
+            "release_date": "2012-10-28", 
+            "version": "38.69", 
+            "species": "mouse"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "experiments.sample", 
+        "fields": {
+            "notes": "some sample from a mouse", 
+            "type": "tissue", 
+            "description": "test sample 1", 
+            "species": "mouse"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "experiments.sample", 
+        "fields": {
+            "notes": "some different sample from a mouse", 
+            "type": "tissue", 
+            "description": "test sample 2", 
+            "species": "mouse"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "experiments.manipulation", 
+        "fields": {
+            "notes": "the samples were treated with something", 
+            "description": "treated"
+        }
+    }
+]
