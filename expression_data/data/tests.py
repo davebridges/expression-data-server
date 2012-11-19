@@ -82,6 +82,20 @@ class GeneExperimentTests(GenericModelTests):
         	q_value = 0.995959851) 
         self.assertEqual(test_datum.__unicode__(), "Pikfyve")
         
+class DataViewTests(GenericModelTests):
+    '''This class tests the views present in the :mod:data package.'''        
+        
+    def test_cufflinks_import_form_view(self):
+        """This tests the cufflinks-import view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/data/cufflinks_import/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTemplateUsed(test_response, 'base.html')
+        self.assertTemplateUsed(test_response, 'import_form.html') 
+     
+        
 class UtilityTests(GenericModelTests):
     '''This class tests the functions in the :mod:`data.utilities` package.'''
 
