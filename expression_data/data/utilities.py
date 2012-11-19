@@ -14,6 +14,9 @@ def cufflinks_gene_diff_import(experiment_id, filename):
     
     This function requires a valid experiment_id and a file.
     '''
+    
+    import decimal
+    
     experiment = mRNASeqExperiment.objects.get(pk=experiment_id)
     new_genes = 0
     updated_genes =0
