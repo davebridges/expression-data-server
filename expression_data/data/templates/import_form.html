@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ gene }}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+<h1>{{ gene }}</h1>
+
+<section id="form">
+
+<form enctype="multipart/form-data" method="post" action="{% url cufflinks-import %}">{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Submit" />
+</form>
+</section>
+
+{% endblock %}

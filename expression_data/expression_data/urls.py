@@ -7,6 +7,7 @@ from django.conf.urls import patterns, include, url
 from researchers.views import ResearcherDetail
 from genes.views import GeneDetail
 from expression_data.views import SearchView
+from data.views import CufflinksImportFormView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -19,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^researcher/(?P<pk>[\d]+)/?$', ResearcherDetail.as_view(), name='researcher-details'),
     url(r'^genes?/(?P<slug>[\d\w-]+)/?$', GeneDetail.as_view(), name='gene-details'),    
     # url(r'^expression_data/', include('expression_data.foo.urls')),
+    
+    url(r'^data/cufflinks_import', CufflinksImportFormView.as_view(), name="cufflinks-import"),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
