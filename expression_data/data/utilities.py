@@ -15,6 +15,8 @@ def cufflinks_gene_diff_import(experiment_id, filename):
     This function requires a valid experiment_id and a file.
     '''
     experiment = mRNASeqExperiment.objects.get(pk=experiment_id)
+    new_genes = 0
+    updated_genes =0
     with open(filename, 'r') as inputfile:
         for row in csv.DictReader(inputfile, delimiter='\t'):
             try: 
@@ -34,7 +36,7 @@ def cufflinks_gene_diff_import(experiment_id, filename):
         			 test_statistic = row['test_stat'],
         			 significant = row['significant'])
                 datum.save()
-                print "Updated %s" % row['gene']
+                updated_genes += 1
             except Gene.DoesNotExist:
                 #create a new gene with that name
                 new_gene = Gene(name=row['gene'])
@@ -55,5 +57,6 @@ def cufflinks_gene_diff_import(experiment_id, filename):
         			 test_statistic = row['test_stat'],
         			 significant = row['significant'])
                 datum.save()
-                print "Created New Gene Named %s" % row['gene']               
+                new_genes +=1
+    return "Added %i measurements and created %i new genes." %(updated_genes+new_genes, new_genes)              
                 

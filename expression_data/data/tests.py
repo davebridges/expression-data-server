@@ -90,7 +90,8 @@ class UtilityTests(GenericModelTests):
     def test_cufflinks_gene_diff_import(self):
         '''This tests the :func:`data.utlities.cufflinks_gene_diff_import` function.'''
         before = GeneExperimentData.objects.count()
-        cufflinks_gene_diff_import(1, "data/fixtures/sample_gene_exp.diff")
+        import_result = cufflinks_gene_diff_import(1, "data/fixtures/sample_gene_exp.diff")
         after = GeneExperimentData.objects.count()
         self.assertEqual(after - before, 9)
+        self.assertEqual(import_result, "Added 9 measurements and created 9 new genes.")
     
