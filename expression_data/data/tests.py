@@ -10,14 +10,14 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 
 from data.models import GeneExperimentData
+from data.utilities import cufflinks_gene_diff_import
 from experiments.models import mRNASeqExperiment
 from genes.models import Gene
+
 MODELS = [GeneExperimentData,]
 
-class GeneExperimentDataTests(TestCase):
-    '''This class tests various aspects of the :class:`~data.models.GeneExperimentData` model.'''
-
-    fixtures = ['experiment_test_fixture', 'gene_test_fixture', ]
+class GenericModelTests(TestCase):
+    '''This bas class sets up the setUP and tearDown functions for model tests.'''
 
     def setUp(self):
         '''Instantiate the test client.  Creates a test user.'''
@@ -36,6 +36,11 @@ class GeneExperimentDataTests(TestCase):
             for obj in model.objects.all():
                 obj.delete()
                 
+class GeneExperimentTests(GenericModelTests):
+    '''This class tests various aspects of the :class:`~data.models.GeneExperimentData` model.'''
+
+    fixtures = ['experiment_test_fixture', 'gene_test_fixture', ]
+
     def test_create_new_gene_experiment_datum_minimum(self):
         '''This test creates a :class:`~data.models.GeneExperimentData` with the required information only.'''
 
@@ -76,3 +81,16 @@ class GeneExperimentDataTests(TestCase):
         	p_value = 0.110512214,
         	q_value = 0.995959851) 
         self.assertEqual(test_datum.__unicode__(), "Pikfyve")
+        
+class UtilityTests(GenericModelTests):
+    '''This class tests the functions in the :mod:`data.utilities` package.'''
+
+    fixtures = ['experiment_test_fixture', 'gene_test_fixture', ]    
+
+    def test_cufflinks_gene_diff_import(self):
+        '''This tests the :func:`data.utlities.cufflinks_gene_diff_import` function.'''
+        before = GeneExperimentData.objects.count()
+        cufflinks_gene_diff_import(1)
+        after = GeneExperimentData.objects.count()
+        self.assertEqual(after - before, 9)
+    
