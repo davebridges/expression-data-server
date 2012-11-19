@@ -9,14 +9,11 @@ from data.models import GeneExperimentData
 from experiments.models import mRNASeqExperiment
 from genes.models import Gene
 
-def cufflinks_gene_diff_import(experiment_id):
+def cufflinks_gene_diff_import(experiment_id, filename):
     '''This function imports the data from a gene_exp.diff into :class:`~data.models.GeneExperimentData` objects.
     
-    This function works manually by defining the file location in the filename line.
+    This function requires a valid experiment_id and a file.
     '''
-    
-    filename = "/Users/davebrid/Documents/SRC/expression-data-server/expression_data/data/fixtures/sample_gene_exp.diff"
-    print "Updating from file %s" % filename
     experiment = mRNASeqExperiment.objects.get(pk=experiment_id)
     with open(filename, 'r') as inputfile:
         for row in csv.DictReader(inputfile, delimiter='\t'):
@@ -39,6 +36,7 @@ def cufflinks_gene_diff_import(experiment_id):
                 datum.save()
                 print "Updated %s" % row['gene']
             except Gene.DoesNotExist:
+                #create a new gene with that name
                 new_gene = Gene(name=row['gene'])
                 new_gene.save()
                 datum = GeneExperimentData(
@@ -57,5 +55,5 @@ def cufflinks_gene_diff_import(experiment_id):
         			 test_statistic = row['test_stat'],
         			 significant = row['significant'])
                 datum.save()
-                print "Created New Gene Named %s" % row['gene']                
+                print "Created New Gene Named %s" % row['gene']               
                 
