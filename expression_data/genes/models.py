@@ -14,15 +14,15 @@ class Gene(models.Model):
     The gene name is the primary key, to maintain consistency.'''
     
     name = models.SlugField(max_length=50, help_text="Official Gene Symbol", primary_key=True)
-    ensemblID = models.CharField(max_length=30, help_text="ENSEMBL Identification number")
-    chromosome = models.CharField(max_length=3, help_text="Chromosome number/name")
-    start = models.PositiveIntegerField(help_text="Gene start position (bp)")
-    end = models.PositiveIntegerField(help_text="Gene end position (bp)")
-    strand = models.IntegerField(help_text="Sense (1) or Antisense(-1)")
+    ensemblID = models.CharField(max_length=30, blank=True, null=True, help_text="ENSEMBL Identification number")
+    chromosome = models.CharField(max_length=3, blank=True, null=True, help_text="Chromosome number/name")
+    start = models.PositiveIntegerField(blank=True, null=True, help_text="Gene start position (bp)")
+    end = models.PositiveIntegerField(blank=True, null=True, help_text="Gene end position (bp)")
+    strand = models.IntegerField(blank=True, null=True, help_text="Sense (1) or Antisense(-1)")
     band = models.CharField(max_length=5, blank=True, null=True, help_text="Chromosome band")
-    transcript_count = models.PositiveIntegerField(help_text="Transcript count for this gene")
-    type = models.CharField(max_length=20, help_text="Gene Type")
-    status = models.CharField(max_length=15, help_text="Current Gene Status")
+    transcript_count = models.PositiveIntegerField(blank=True, null=True, help_text="Transcript count for this gene")
+    type = models.CharField(blank=True, null=True, max_length=20, help_text="Gene Type")
+    status = models.CharField(blank=True, null=True, max_length=15, help_text="Current Gene Status")
 
     #created = models.DateTimeField(auto_now_add = True, help_text="Created in our database")
     #updated = models.DateTimeField(auto_now = True, help_text="Last Updated in our database")
